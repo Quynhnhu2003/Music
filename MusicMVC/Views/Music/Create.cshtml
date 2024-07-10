@@ -1,0 +1,106 @@
+﻿@model MusicMVC.ViewModels.MusicViewModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var isCreate = Model == null || Model.Id == Guid.Empty;
+    var actionString = isCreate ? "Create" : "Edit";
+    var buttonString = isCreate ? "Create" : "Edit";
+}
+
+<h1>Create Music</h1>
+
+<hr />
+<form asp-action="@actionString" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Id" class="form-control" />
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <label asp-for="Name" class="control-label"></label>
+                    <fieldset class="form-group">
+                        <input asp-for="Name" class="form-control" />
+                    </fieldset>
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <label asp-for="Lyrics" class="control-label"></label>
+                    <fieldset class="form-group">
+                        <textarea asp-for="Lyrics" rows="3" class="form-control"></textarea>
+                    </fieldset>
+                    <span asp-validation-for="Lyrics" class="text-danger"></span>
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <div class="card-body">
+                    <label asp-for="ArtistId" class="control-label">Artist Name</label>
+                    <fieldset class="form-group">
+                        <select asp-for="ArtistId" asp-items="ViewBag.Artists" class="form-control custom-select"></select>
+                    </fieldset>
+                    <span asp-validation-for="ArtistId" class="text-danger"></span>
+                </div>
+
+            </div>
+            <div class="form-group" style="text-align: center;">
+                <input type="submit" value="@buttonString" class="btn btn-primary" />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <label asp-for="FileMusic" class="control-label">Music MP3</label>
+                            <fieldset class="form-group">
+                                <div class="custom-file">
+                                    <input asp-for="FileMusic" class="form-control custom-file-input" type="file" />
+                                    <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFile02">Choose file</label>
+                                </div>
+                            </fieldset>
+                            <span asp-validation-for="FileMusic" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-3">
+                            @if(!string.IsNullOrEmpty(Model?.MusicPath))
+                            {
+                                <div>
+                                    @* <audio name="audioTag" controls>
+                                        <source src="@Url.Content(Model.MusicPath)" type="audio/ogg">
+                                    </audio> *@
+                                    <audio controls>
+                                        <source src="horse.ogg" type="audio/ogg">
+                                        <source src="horse.mp3" type="audio/mpeg">
+                                    </audio>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            @await Component.InvokeAsync("MusicList")
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+@*@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}*@
+    <script>
+        function playMedia(pointer) {
+            // let Audio = pointer.nextSibling;
+            let tagAudio = document.getElementById("audioTag")
+            console.log(Audio);
+            if (tagAudio) {
+                tagAudio.play();
+            }
+        }
+    </script>
+}

@@ -1,0 +1,40 @@
+﻿@model MusicMVC.ViewModels.MediumViewModel[]
+@{
+    ViewData["Title"] = "Media";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div id="divMedia" class="row">
+    @if(Model != null && Model.Length > 0) {
+        for(var i = 0; i < Model.Length; i++) {
+            var medium = Model[i];
+            <div class="col-md-3 text-center">
+                <img name="audioImg" src="@Url.Content("~/lib/img/audio-file.png")" alt="@medium.Name" class="w-50" />
+                <audio name="audioTag">
+                    <source src="@Url.Content(medium.FilePath)" type="audio/ogg">
+                </audio>
+                <span>@medium.Name</span>
+            </div>
+        }
+    }
+</div>
+
+@section Scripts {
+    <script>
+        //Document Ready using Javascript
+        document.addEventListener("DOMContentLoaded", () => {
+            let divMedia = document.getElementById("divMedia");
+            let arrayImage = divMedia.querySelectorAll("img[name='audioImg']");
+            if (arrayImage != null && arrayImage.length > 0) {
+                for (let i = 0; i < arrayImage.length; i++) {
+                    let image = arrayImage[i];
+                    image.addEventListener("click", function () {
+                        let audioTag = image.nextElementSibling;
+                        console.log(audioTag)
+                        if (audioTag) audioTag.Play();
+                    })
+                }
+            }
+        });
+    </script>
+}

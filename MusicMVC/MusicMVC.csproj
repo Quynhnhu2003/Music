@@ -1,0 +1,71 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Services\" />
+    <Folder Include="wwwroot\app-assets\css-rtl\plugins\menu\mmenu\extensions\borderstyle\" />
+    <Folder Include="wwwroot\app-assets\css-rtl\plugins\menu\mmenu\extensions\justifiedlistview\" />
+    <Folder Include="wwwroot\app-assets\css-rtl\plugins\menu\mmenu\extensions\positioning\" />
+    <Folder Include="wwwroot\app-assets\css\plugins\menu\mmenu\extensions\justifiedlistview\" />
+    <Folder Include="wwwroot\app-assets\vendors\js\editors\ckeditor\plugins\sourcedialog\icons\hidpi\" />
+    <Folder Include="wwwroot\app-assets\vendors\js\editors\ckeditor\samples\old\htmlwriter\assets\" />
+    <Folder Include="wwwroot\app-assets\vendors\js\editors\ckeditor\samples\toolbarconfigurator\js\" />
+    <Folder Include="wwwroot\app-assets\vendors\js\editors\ckeditor\samples\toolbarconfigurator\lib\" />
+    <Folder Include="wwwroot\app-assets\vendors\js\editors\tinymce\themes\mobile\main\ts\android\focus\" />
+    <Folder Include="wwwroot\app-assets\vendors\js\editors\tinymce\themes\mobile\main\ts\ios\smooth\" />
+    <Folder Include="wwwroot\app-assets\vendors\js\editors\tinymce\themes\mobile\main\ts\touch\focus\" />
+    <Folder Include="wwwroot\app-assets\vendors\js\editors\tinymce\themes\mobile\test\ts\atomic\smooth\" />
+    <Folder Include="wwwroot\app-assets\vendors\js\editors\tinymce\themes\mobile\test\ts\atomic\styles\" />
+    <Folder Include="wwwroot\app-assets\vendors\js\editors\tinymce\themes\mobile\test\ts\browser\features\" />
+    <Folder Include="wwwroot\app-assets\vendors\js\editors\tinymce\themes\mobile\test\ts\phantom\bridge\" />
+    <Folder Include="wwwroot\app-assets\vendors\js\editors\tinymce\themes\mobile\test\ts\phantom\features\" />
+    <Folder Include="wwwroot\app-assets\vendors\js\editors\tinymce\themes\silver\demo\ts\components\alert\" />
+    <Folder Include="wwwroot\app-assets\vendors\js\editors\tinymce\themes\silver\demo\ts\dialogs\spec\" />
+    <Folder Include="wwwroot\app-assets\vendors\js\editors\tinymce\themes\silver\main\ts\autocomplete\" />
+    <Folder Include="wwwroot\app-assets\vendors\js\editors\tinymce\themes\silver\main\ts\ui\core\complex\" />
+    <Folder Include="wwwroot\app-assets\vendors\js\editors\tinymce\themes\silver\main\ts\ui\dropdown\" />
+    <Folder Include="wwwroot\app-assets\vendors\js\editors\tinymce\themes\silver\main\ts\ui\menus\menubar\" />
+    <Folder Include="wwwroot\app-assets\vendors\js\editors\tinymce\themes\silver\main\ts\ui\sizeinput\" />
+    <Folder Include="wwwroot\app-assets\vendors\js\editors\tinymce\themes\silver\test\ts\atomic\context\" />
+    <Folder Include="wwwroot\app-assets\vendors\js\editors\tinymce\themes\silver\test\ts\atomic\menus\" />
+    <Folder Include="wwwroot\app-assets\vendors\js\editors\tinymce\themes\silver\test\ts\browser\editor\" />
+    <Folder Include="wwwroot\app-assets\vendors\js\editors\tinymce\themes\silver\test\ts\browser\sidebar\" />
+    <Folder Include="wwwroot\app-assets\vendors\js\editors\tinymce\themes\silver\test\ts\browser\skin\" />
+    <Folder Include="wwwroot\app-assets\vendors\js\editors\tinymce\themes\silver\test\ts\browser\throbber\" />
+    <Folder Include="wwwroot\app-assets\vendors\js\editors\tinymce\themes\silver\test\ts\phantom\configs\" />
+    <Folder Include="wwwroot\app-assets\vendors\js\editors\tinymce\themes\silver\test\ts\phantom\toolbar\" />
+    <Folder Include="wwwroot\app-assets\vendors\js\editors\tinymce\themes\silver\test\ts\phantom\window\" />
+    <Folder Include="wwwroot\app-assets\vendors\js\editors\tinymce\themes\silver\test\ts\webdriver\editor\" />
+    <Folder Include="wwwroot\music\" />
+    <Folder Include="wwwroot\src\scss\bootstrap-extended\.sass-cache\" />
+    <Folder Include="wwwroot\src\scss\plugins\menu\mmenu\extensions\justifiedlistview\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\src\.DS_Store" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter" Version="8.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
+  </ItemGroup>
+
+</Project>

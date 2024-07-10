@@ -1,0 +1,31 @@
+﻿@model List<MusicMVC.Data.Entities.Artist>
+
+<table>
+	<tr>
+		<th width="10%">No. </th>
+		<th width="50%">Name </th>
+		<th width="70%">Action </th>
+	</tr>
+	
+	@if (Model != null)
+	{
+		var position = 1;
+		foreach(var artist in Model)
+		{
+			<tr>
+				<td>@(position++)</td>
+				<td>@artist.Name</td>
+				<td>
+					<a href="~/Artist/Edit/?idArtist=@artist.Id"> Update</a>
+				</td>
+			</tr>
+		}
+	}
+	else
+	{
+		<tr>
+			<td colspan="3">Empty data</td>
+		</tr>
+	}
+	
+</table>
