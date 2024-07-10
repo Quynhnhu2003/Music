@@ -84,9 +84,11 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-            @await Component.InvokeAsync("MusicList")
+            <div id="music-list">
+
+                @await Component.InvokeAsync("MusicList")
+            </div>
         </div>
     </div>
 </form>
@@ -101,6 +103,48 @@
             if (tagAudio) {
                 tagAudio.play();
             }
+        }
+        function deleteMusic(idMusic) {
+            // alert("Build Successfully!!!");
+            // return;
+            $.ajax({
+                type: 'POST',
+                url: "/Music/Delete",
+                data: {
+                    idMusic
+                },
+                success: function(data) {
+                    if (data.status) {
+                        ReloadMusicList();
+                    }
+                },
+                error: function(err) {
+
+                },
+                complete: function(e) {
+
+                },
+            });
+        }
+        function ReloadMusicList() {
+            // alert("Build Successfully!!!");
+            // return;
+            $.ajax({
+                type: 'POST',
+                url: "/Music/ReloadMusicList",
+                success: function (data) {
+                    let divMusicList = document.getElementById("music-list");
+                    if (divMusicList) {
+                        divMusicList.innerHTML = data;
+                    }
+                },
+                error: function (err) {
+
+                },
+                complete: function (e) {
+
+                },
+            });
         }
     </script>
 }

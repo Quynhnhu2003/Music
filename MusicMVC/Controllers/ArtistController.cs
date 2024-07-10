@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MusicMVC.Data;
@@ -8,6 +9,7 @@ using System.Linq;
 
 namespace MusicMVC.Controllers
 {
+    [Authorize(Roles = "Manager, Admin")]
     public class ArtistController : Controller
     {
         private readonly MusicDbContext _context;

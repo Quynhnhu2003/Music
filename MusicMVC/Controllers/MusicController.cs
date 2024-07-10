@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -6,11 +7,13 @@ using MusicMVC.Commons;
 using MusicMVC.Data;
 using MusicMVC.Data.Entities;
 using MusicMVC.Enums;
+using MusicMVC.ViewComponents;
 using MusicMVC.ViewModels;
 
 
 namespace MusicMVC.Controllers
 {
+    [Authorize(Roles = "Manager, Editor")]
     public class MusicController : Controller
     {
         private readonly MusicDbContext _context;
@@ -123,6 +126,70 @@ namespace MusicMVC.Controllers
                 return View(nameof(Create), musicVM);
             }
 
+        }
+        [HttpPost]
+        public async Task<IActionResult> Delete(Guid idMusic)
+        {
+            var status = false;
+            var message = "Chưa thực thi";
+            try
+            {
+                //var music = await _context.Musics.FindAsync(idMusic);
+                //=== Predicate/delgate ===//
+                var music = await _context.Musics
+                    .Where(m => m.Id.Equals(idMusic))
+                    .Include(m => m.Artist)
+                    .SingleOrDefaultAsync();
+                if (music != null)
+                {
+                    //=== Step 1: Decreasement Position ===//
+                    var currentPosition = music.Position;
+                    var listMusic = await _context.Musics
+                        .Where(x => x.Position > currentPosition)
+                        .ToListAsync();
+                    if(listMusic != null && listMusic.Count > 0)
+                    {
+                        foreach (var item in listMusic)
+                        {
+                            item.Position -= 1;
+                        }
+                    }
+                    //=== Step 2: Recalculate MusicCount in Artist ===//
+                    music.Artist.MusicCount -= 1;
+                    //var artist = music.Artist;
+                    //if (artist != null)
+                    //{
+                    //    artist.MusicCount -= 1;
+                    //}
+                    //var listArtist = await _context.Artists
+                    //    .Include(a => a.Musics)
+                    //    .Where(a => a.Musics.Any(mbox => mbox.Id == idMusic))
+                    //    .ToListAsync();
+                    //if(listArtist != null && listArtist.Count > 0)
+                    //{
+                    //    foreach (var artist in listArtist)
+                    //    {
+                    //        artist.MusicCount -= 1;
+                    //    }
+                    //}
+                    //=== Step 3: Remove Music ====//
+                    _context.Musics.Remove(music);
+                }
+
+                await _context.SaveChangesAsync();
+                status = true;
+                message = "Thành công";
+            }
+            catch
+            {
+                message = "Lỗi thực thi";
+            }
+            return Json(new {status, message });
+        }
+        public IActionResult ReloadMusicList()
+        {
+
+            return ViewComponent(nameof(MusicList));
         }
         private async Task<bool> UpdateMusicCountByArtist(Guid idArtist, int valueChanged)
         {
