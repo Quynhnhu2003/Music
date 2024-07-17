@@ -1,10 +1,13 @@
-﻿namespace MusicMVC.Data.Entities
+﻿using System.Collections.ObjectModel;
+
+namespace MusicMVC.Data.Entities
 {
     public class Music
     {
         public Music() 
         {
             this.Id = Guid.NewGuid();
+            OrderDetails = new Collection<OrderDetail>();
         }
 
         // có thể đánh prop xong tab là xuất hiện bên dưới
@@ -20,5 +23,7 @@
         public virtual Artist Artist { get; set; }
         public Guid? MediumId { get; set; }
         public virtual Medium Medium { get; set; }
+
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

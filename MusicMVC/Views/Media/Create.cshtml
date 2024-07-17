@@ -1,0 +1,60 @@
+﻿@* @model IEnumerable<IFormFile> *@
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <h1>Media Form</h1>
+        <form enctype="multipart/form-data">
+            <label class="control-label">Music MP3</label>
+            <fieldset class="form-group">
+                <div class="custom-file">
+                    <input id="input-file" class="form-control custom-file-input" multiple type="file" />
+                    <label class="custom-file-label">Choose file</label>
+                </div>
+            </fieldset>
+            <span class="text-danger"></span>
+            <button onclick="uploadFile()" type="button" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <div class="col-md-8">
+        <h1>Media List</h1>
+
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function uploadFile() {
+            let inputFile = document.getElementById("input-file");
+            let listIFormFile = inputFile.files;
+            let formData = new FormData();
+
+            if (listIFormFile) {
+                for (let i = 0; i < listIFormFile.length; i++) {
+                    formData.append("listFile", listIFormFile[i]);
+                } 
+            };
+
+            $.ajax({
+                url: "/Media/UploadMedia",
+                data: formData,
+                processData: false,
+                contentType: false,
+                type: 'POST',
+                success: function (data) {
+                    alert("Success",data.message)
+                },
+                error: function (err) {
+                    alert("Error", err)
+                },
+                complete: function() {
+                    //=== Đóng thanh loading ===//
+                }
+            });
+        }
+    </script>
+}

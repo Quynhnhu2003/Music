@@ -5,7 +5,8 @@ using MusicMVC.Areas.Identity.Data;
 using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("MusicIdentityContextConnection") ?? throw new InvalidOperationException("Connection string 'MusicIdentityContextConnection' not found.");
+var connectionString = builder.Configuration.GetConnectionString("MusicIdentityContextConnection") 
+    ?? throw new InvalidOperationException("Connection string 'MusicIdentityContextConnection' not found.");
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -76,5 +77,6 @@ app.MapRazorPages();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+//pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

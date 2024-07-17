@@ -28,10 +28,16 @@ namespace MusicMVC.Data
                 .ApplyConfiguration(new ArtistConfiguration());
             Builder
                 .ApplyConfiguration(new MediumConfiguration());
+            Builder
+                .ApplyConfiguration(new OrderConfiguration());
+            Builder
+                .ApplyConfiguration(new OrderDetailConfiguration());
         }
 
         public DbSet<Artist> Artists { get; set; }
         public DbSet<Music> Musics { get; set; }
         public DbSet<Medium> Media { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
     }
 }
