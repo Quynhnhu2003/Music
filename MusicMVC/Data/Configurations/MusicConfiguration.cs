@@ -25,10 +25,10 @@ namespace MusicMVC.Data.Configurations
             builder.Property(b => b.Lyrics)
                 .HasMaxLength(2000);
 
-            builder.HasData( new Entities.Music
-             { Id = Guid.NewGuid() , Name  = " Take me to your heart " , Lyrics = "" , ArtistId = Guid.Parse("2a275182-877d-4368-a135-156bea1b685b")});
-            builder.HasData(new Entities.Music
-            { Id = Guid.NewGuid(), Name = " Hay Trao Cho Toi ", Lyrics = "",  ArtistId = Guid.Parse("7e51cdda-b651-4081-b0df-b3ab3e4da734") });
+            //builder.HasData( new Entities.Music
+            // { Id = Guid.NewGuid() , Name  = " Take me to your heart " , Lyrics = "" , ArtistId = Guid.Parse("2a275182-877d-4368-a135-156bea1b685b")});
+            //builder.HasData(new Entities.Music
+            //{ Id = Guid.NewGuid(), Name = " Hay Trao Cho Toi ", Lyrics = "",  ArtistId = Guid.Parse("7e51cdda-b651-4081-b0df-b3ab3e4da734") });
 
             //throw new NotImplementedException();
 

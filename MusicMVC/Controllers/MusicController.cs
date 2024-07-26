@@ -44,6 +44,8 @@ namespace MusicMVC.Controllers
                 {
                     Name = musicVM.Name.Trim(),
                     Lyrics = musicVM.Lyrics.Trim(),
+                    Price = musicVM.Price,
+                    PriceDiscounted = musicVM.PriceDiscounted,
                     ArtistId = musicVM.ArtistId,
                     //FileName = fileGuidName,
                     MediumId = media != null ? media.Id : null,
@@ -80,6 +82,8 @@ namespace MusicMVC.Controllers
                 Id = music.Id,
                 Name = music.Name,
                 Lyrics = music.Lyrics,
+                Price = music.Price,
+                PriceDiscounted = music.PriceDiscounted,
                 ArtistId = music.ArtistId,
                 //FileName = music.FileName,
                 MusicPath = MusicViewModel.GetMusicPath(music),
@@ -102,6 +106,8 @@ namespace MusicMVC.Controllers
                 //=== Sửa trường nào thì cập nhật trường đó ===//
                 music.Name = musicVM.Name;
                 music.Lyrics = musicVM.Lyrics;
+                music.Price = musicVM.Price;
+                music.PriceDiscounted = musicVM.PriceDiscounted;
                 if (musicVM.ArtistId != music.ArtistId)
                 {
                     await UpdateMusicCountByArtist(musicVM.ArtistId, 1);
@@ -157,22 +163,7 @@ namespace MusicMVC.Controllers
                     }
                     //=== Step 2: Recalculate MusicCount in Artist ===//
                     music.Artist.MusicCount -= 1;
-                    //var artist = music.Artist;
-                    //if (artist != null)
-                    //{
-                    //    artist.MusicCount -= 1;
-                    //}
-                    //var listArtist = await _context.Artists
-                    //    .Include(a => a.Musics)
-                    //    .Where(a => a.Musics.Any(mbox => mbox.Id == idMusic))
-                    //    .ToListAsync();
-                    //if(listArtist != null && listArtist.Count > 0)
-                    //{
-                    //    foreach (var artist in listArtist)
-                    //    {
-                    //        artist.MusicCount -= 1;
-                    //    }
-                    //}
+
                     //=== Step 3: Remove Music ====//
                     _context.Musics.Remove(music);
                 }
@@ -187,10 +178,10 @@ namespace MusicMVC.Controllers
             }
             return Json(new {status, message });
         }
-        public IActionResult ReloadMusicList()
+        public IActionResult ReloadMusicList(int currentPage = 1)
         {
 
-            return ViewComponent(nameof(MusicList));
+            return ViewComponent(nameof(MusicList), new { currentPage });
         }
         private async Task<bool> UpdateMusicCountByArtist(Guid idArtist, int valueChanged)
         {
@@ -214,6 +205,26 @@ namespace MusicMVC.Controllers
                 .ToListAsync();
             return new SelectList(listArtist, "Id", "Name");
         }
-        
+        public async Task<IActionResult> ProductList()
+        {
+            var model = await _context.Musics
+                .Include(m => m.Artist)
+                .Include(m => m.Medium)
+                .OrderBy(m => m.Position)
+                .Select(m => new MusicViewModel
+                {
+                    Id = m.Id,
+                    Name = m.Name,
+                    Lyrics = m.Lyrics,
+                    Position = m.Position,
+                    Price = m.Price,
+                    PriceDiscounted = m.PriceDiscounted,
+                    //MusicPath = Constants.Music_Path + m.Medium.FileName = "." + m.Medium.Extension,
+                    MusicPath = MusicViewModel.GetMusicPath(m),
+                })
+                .ToArrayAsync();
+
+            return View(model);
+        }
     }
 }

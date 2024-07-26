@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MusicMVC.ViewModels
 {
-    [Bind("Id, Name, FileMusic, Lyrics, ReleaseYear, ArtistId")]
+    [Bind("Id, Name, FileMusic, Lyrics, ReleaseYear, ArtistId, Price, PriceDiscounted")]
     // 2 nơi củng gọi 1 số phải làm 1 biến
     public class MusicViewModel
 	{
@@ -15,6 +15,10 @@ namespace MusicMVC.ViewModels
         public IFormFile? FileMusic { get; set; }
         public string MusicPath { get; set; }
         public Guid ArtistId { get; set; }
+        public string ArtistName { get; set; }
+        public double Price { get; set; }
+        public double PriceDiscounted { get; set; }
+        public int Position { get; set; }
 
         public static string GetMusicPath(Music music)
         {

@@ -16,10 +16,11 @@ namespace MusicMVC.Data.Entities
         public string? FileName { get; set; }
         public string? Lyrics { get; set; }
         public int Position { get; set; }
-/*        public int? ReleaseYear { get; set; } */
+        public double Price { get; set; }
+        public double PriceDiscounted { get; set; }
 
-        // === Navigational Property === //
-        public Guid ArtistId { get; set; }
+		// === Navigational Property === //
+		public Guid ArtistId { get; set; }
         public virtual Artist Artist { get; set; }
         public Guid? MediumId { get; set; }
         public virtual Medium Medium { get; set; }

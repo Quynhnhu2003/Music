@@ -8,7 +8,7 @@
         public readonly static string[] Valid_Audio_Extenstion = { "mp3", "ogg" };
 
         public const string Music_Path = "~/music/";
-        public const string SQL_Server = "LAPTOP-M2M74TDG\\SQLEXPRESS";
+        public const int TAKE = 5;
 
     }
 

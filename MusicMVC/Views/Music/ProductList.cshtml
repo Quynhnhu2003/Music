@@ -1,0 +1,70 @@
+﻿@model MusicMVC.ViewModels.MusicViewModel[]
+@{
+    ViewData["Title"] = "Music Store";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div id="divMusicStore" class="row">
+    @if(Model != null && Model.Length > 0) {
+        for(var i = 0; i < Model.Length; i++) {
+
+            var mediumMusic = Model[i];
+
+            <div class="col-md-3 text-center">
+                <img name="audioImg" src="@Url.Content("~/lib/img/audio-file.png")" alt="@mediumMusic.Name" class="w-50" />
+                <audio name="audioTag">
+                    <source src="@Url.Content(mediumMusic.MusicPath)" type="audio/ogg">
+                </audio>
+                <div class="fs-4">@mediumMusic.Name</div>
+                <div class="text-danger fw-bold fs-5">
+                    Price Discounted: @mediumMusic.PriceDiscounted
+                </div>
+                <div class="text-decoration-line-through fs-6">
+                    Price: @mediumMusic.Price
+                </div>
+                <button type="button" data-id="@mediumMusic.Id" name="btnBuyIt"><i class="fa-solid fa-cart-plus"></i></button>
+            </div>
+        }
+    }
+</div>
+
+@section Scripts {
+    <script>
+        //Document Ready using Javascript
+        document.addEventListener("DOMContentLoaded", () => {
+            let divMusicStore = document.getElementById("divMusicStore");
+            let arrayImage = divMusicStore.querySelectorAll("img[name='audioImg']");
+            let arrayBuyItBtn = divMusicStore.querySelectorAll('button[name="btnBuyIt"]')
+
+            if (arrayImage != null && arrayImage.length > 0) {
+                for (let i = 0; i < arrayImage.length; i++) {
+                    let image = arrayImage[i];
+                    image.addEventListener("click", function () {
+                        let audioTag = image.nextElementSibling;
+                        console.log(audioTag)
+                        if (audioTag) audioTag.play();
+                    })
+                }
+            }
+
+            if (arrayBuyItBtn && arrayBuyItBtn.length > 0) {
+                for (let i = 0; i < arrayBuyItBtn.length; i++) {
+                    let butonBuyIt = arrayBuyItBtn[i];
+                    buttonBuyIt.addEventListener("click", function (event) {
+                        // let idMusic = buttonBuyIt.dataset.id;
+                        let idMusic = event.target.dataset.id;
+                        buyIt(idMusic);
+                    });
+                }
+            }
+        });
+        function buyIt(idMusic) {
+            console.log(idMusic)
+            let shoppingCart = document.getElementById("shopping-cart");
+            if (shoppingCart) {
+                let currentNumber = parseInt(shoppingCart.textContent);
+                shoppingCart.textContent = currentNumber + 1;
+            }
+        }
+    </script>
+}

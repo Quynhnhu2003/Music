@@ -15,7 +15,7 @@ namespace MusicMVC.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var connectionString = "Server=LAPTOP-M2M74TDG\\SQLEXPRESS;Database=MusicDbContext;User Id=itsjuneka; password=Quynhnhu@14; TrustServerCertificate=True; Trusted_Connection=False; MultipleActiveResultSets=true;";
+            var connectionString = "Server=LAPTOP-M2M74TDG\\SQLEXPRESS;Database=MusicDbContext;User Id=itsjuneka; password=P@ssword123; TrustServerCertificate=True; Trusted_Connection=False; MultipleActiveResultSets=true;";
             optionsBuilder.UseSqlServer(connectionString);
            
         }

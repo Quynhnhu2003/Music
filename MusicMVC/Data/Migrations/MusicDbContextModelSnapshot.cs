@@ -135,6 +135,12 @@ namespace MusicMVC.Data.Migrations
                     b.Property<int>("Position")
                         .HasColumnType("int");
 
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<double>("PriceDiscounted")
+                        .HasColumnType("float");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ArtistId");
@@ -146,19 +152,23 @@ namespace MusicMVC.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("f450ba0b-4afd-4251-ac20-556faf906d71"),
+                            Id = new Guid("2c950e96-bc37-424c-a0f1-9175391bf6b2"),
                             ArtistId = new Guid("2a275182-877d-4368-a135-156bea1b685b"),
                             Lyrics = "",
                             Name = " Take me to your heart ",
-                            Position = 0
+                            Position = 0,
+                            Price = 0.0,
+                            PriceDiscounted = 0.0
                         },
                         new
                         {
-                            Id = new Guid("e9c75676-0524-4cb0-ae53-622cae1b27d6"),
+                            Id = new Guid("3b372564-1d8d-4d83-811c-c27f5d4a12c2"),
                             ArtistId = new Guid("7e51cdda-b651-4081-b0df-b3ab3e4da734"),
                             Lyrics = "",
                             Name = " Hay Trao Cho Toi ",
-                            Position = 0
+                            Position = 0,
+                            Price = 0.0,
+                            PriceDiscounted = 0.0
                         });
                 });
 

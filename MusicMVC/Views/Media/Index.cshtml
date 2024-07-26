@@ -4,9 +4,6 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-
-
-
 <div id="divMedia" class="row">
     @if(Model != null && Model.Length > 0) {
         for(var i = 0; i < Model.Length; i++) {
@@ -34,7 +31,7 @@
                     image.addEventListener("click", function () {
                         let audioTag = image.nextElementSibling;
                         console.log(audioTag)
-                        if (audioTag) audioTag.Play();
+                        if (audioTag) audioTag.play();
                     })
                 }
             }

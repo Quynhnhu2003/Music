@@ -1,11 +1,21 @@
-﻿@model List<MusicMVC.Data.Entities.Music>
+﻿@* @model List<MusicMVC.Data.Entities.Music> *@
+@model List<MusicMVC.ViewModels.MusicSummaryViewModel>
+
+@{
+	var currentPage = (int)ViewBag.CurrentPage;
+	var maxPage = (int)ViewBag.MaxPage;
+	var previous = currentPage - 1;
+	var next = currentPage + 1;
+}
 
 <table>
 	<tr>
 		<th width="10%">No.</th>
-		<th width="40%">Name </th>
-		<th width="40%">Artist</th>
-		<th width="10%">Action </th>
+		<th width="25%">Name </th>
+		<th width="25%">Artist</th>
+@* 		<th width="10%">Price</th>
+		<th width="10%">Discounted</th *@>
+		<th width="20%">Action </th>
 	</tr>
 	
 	@if (Model != null)
@@ -16,11 +26,11 @@
 			<tr>
 				<td>@music.Position</td>
 				<td>@music.Name</td>
-				<td>@music.Artist.Nickname</td>
-				<td>
+				<td>@music.ArtistName</td>
+@* 				<td>$@music.Price</td>
+				<td>$@music.PriceDiscounted</td> *@
+				<td class="d-flex">
 					<a href="~/Music/Edit/?idMusic=@music.Id">Update</a>
-				</td>
-				<td>
 					<button class="btn btn-outline-primary" type="button" onclick="deleteMusic('@music.Id')">Delete</button>
 				</td>
 			</tr>
@@ -34,3 +44,26 @@
 	}
 	
 </table>
+<div class="row">
+	<div class="col-md-12 text-center mt-2">
+		@if(previous == 0)
+		{
+			<button type="button" class="btn btn-success btn_pagination" disabled>&laquo;</button>
+		}
+		else
+		{
+			<button type="button" class="btn btn-outline-success btn_pagination" onclick="ReloadMusicList(@previous)">&laquo;</button>
+		}
+		<button type="button" class="btn btn-outline-success">
+			@currentPage
+		</button>
+		@if (maxPage == currentPage)
+		{
+			<button type="button" class="btn btn-success" disabled>&raquo;</button>
+		}
+		else
+		{
+			<button type="button" class="btn btn-outline-success" onclick="ReloadMusicList(@next)">&raquo;</button>
+		}
+	</div>
+</div>
